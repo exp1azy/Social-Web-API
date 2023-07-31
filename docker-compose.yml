@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  socialapi:
+    image: ${DOCKER_REGISTRY-}socialapi
+    build:
+      context: .
+      dockerfile: SocialAPI/Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./data:/app/data
+
+  rabbitmq:
+    image: rabbitmq:3.12.2-management
+    hostname: "rabbitmq"
+    labels:
+      NAME: "rabbitmq"
+    ports:
+    - "4369:4369"
+    - "5671:5671"
+    - "5672:5672"
+    - "25672:25672"
+    - "15671:15671"
+    - "15672:15672"
+  
+  db:
+    image: bitnami/sqlite
+    volumes:
+      - ./data:/bitnami/sqlite
