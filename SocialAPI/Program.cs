@@ -23,12 +23,14 @@ builder.Services.AddTransient<ISubscriptionRepository, SubscriptionRepository>()
 builder.Services.AddTransient<IMessageRepository, MessageRepository>();
 builder.Services.AddTransient<IPostRepository, PostRepository>();
 builder.Services.AddTransient<ICommentRepository, CommentRepository>();
+builder.Services.AddTransient<ILikeRepository, LikeRepository>();
 
 builder.Services.AddTransient<UserService>();
 builder.Services.AddTransient<SubscriptionService>();
 builder.Services.AddTransient<MessageService>();
 builder.Services.AddTransient<PostService>();
 builder.Services.AddTransient<CommentService>();
+builder.Services.AddTransient<LikeService>();
 
 builder.Services.AddScoped<RabbitMqService>();
 builder.Services.AddSingleton<RabbitConnection>();
