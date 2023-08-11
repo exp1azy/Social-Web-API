@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SocialAPI.Extensions;
 using SocialAPI.Models;
+using SocialAPI.RabbitMq;
 using SocialAPI.Services;
 
 namespace SocialAPI.Controllers

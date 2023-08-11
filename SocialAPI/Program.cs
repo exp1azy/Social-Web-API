@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using SocialAPI.Data;
+using SocialAPI.RabbitMq;
 using SocialAPI.Repositories;
 using SocialAPI.Repositories.Interfaces;
 using SocialAPI.Services;
@@ -28,7 +29,9 @@ builder.Services.AddTransient<SubscriptionService>();
 builder.Services.AddTransient<MessageService>();
 builder.Services.AddTransient<PostService>();
 builder.Services.AddTransient<CommentService>();
+
 builder.Services.AddScoped<RabbitMqService>();
+builder.Services.AddSingleton<RabbitConnection>();
 
 var config = builder.Configuration.GetSection("Jwt");
 var iss = config["ValidIssuer"];

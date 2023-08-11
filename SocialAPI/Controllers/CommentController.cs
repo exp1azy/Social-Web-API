@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SocialAPI.Extensions;
+using SocialAPI.RabbitMq;
 using SocialAPI.Services;
 
 namespace SocialAPI.Controllers
