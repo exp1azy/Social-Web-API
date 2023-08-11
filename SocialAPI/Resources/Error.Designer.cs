@@ -61,6 +61,15 @@ namespace SocialAPI.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Такого комментария не существует.
+        /// </summary>
+        public static string CommentNotExistingError {
+            get {
+                return ResourceManager.GetString("CommentNotExistingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Комментарий не может быть пустым или состоять из пробелов.
         /// </summary>
         public static string CommentTextError {
@@ -88,6 +97,24 @@ namespace SocialAPI.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Список подписчиков пуст.
+        /// </summary>
+        public static string NoSubscribersError {
+            get {
+                return ResourceManager.GetString("NoSubscribersError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Такого поста не существует.
+        /// </summary>
+        public static string PostNotExistingError {
+            get {
+                return ResourceManager.GetString("PostNotExistingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Текст поста не может быть пустым или состоять из пробелов.
         /// </summary>
         public static string PostTextError {
@@ -111,6 +138,24 @@ namespace SocialAPI.Resources {
         public static string SelfSubscriptionError {
             get {
                 return ResourceManager.GetString("SelfSubscriptionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы уже подписаны.
+        /// </summary>
+        public static string SubscriptionExistingError {
+            get {
+                return ResourceManager.GetString("SubscriptionExistingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Такой подписки не существует.
+        /// </summary>
+        public static string SubscriptionNotExistingError {
+            get {
+                return ResourceManager.GetString("SubscriptionNotExistingError", resourceCulture);
             }
         }
         

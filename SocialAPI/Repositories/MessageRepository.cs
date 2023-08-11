@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SocialAPI.Data;
 using SocialAPI.Repositories.Interfaces;
+using SocialAPI.Resources;
 
 namespace SocialAPI.Repositories
 {
@@ -19,7 +20,7 @@ namespace SocialAPI.Repositories
 
             if (userExist == null)
             {
-                throw new NullReferenceException("Такого пользователя не существует");
+                throw new ApplicationException(Error.UserNotExistingError);
             }
 
             await _dataContext.Messages.AddAsync(new Message

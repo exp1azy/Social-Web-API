@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SocialAPI.Data;
 using SocialAPI.Repositories.Interfaces;
+using SocialAPI.Resources;
 
 namespace SocialAPI.Repositories
 {
@@ -18,7 +19,7 @@ namespace SocialAPI.Repositories
             var responder = await _dataContext.Users.FirstOrDefaultAsync(u => u.Id == responderId, cancellationToken);
             if (responder == null)
             {
-                throw new NullReferenceException("Такого пользователя не существует, подписка невозможна");
+                throw new ApplicationException(Error.UserNotExistingError);
             }
 
             var existSub = await _dataContext.Subscriptions.FirstOrDefaultAsync(s => s.FollowerId == followerId && s.ResponderId == responderId, cancellationToken);
@@ -35,7 +36,7 @@ namespace SocialAPI.Repositories
             }
             else
             {
-                throw new ArgumentException($"Вы уже подписаны на {responder.Name}");
+                throw new ApplicationException($"{Error.SubscriptionExistingError} на {responder.Name}");
             }
         }
 
@@ -50,7 +51,7 @@ namespace SocialAPI.Repositories
             }
             else
             {
-                throw new NullReferenceException("Отписка невозможна");
+                throw new ApplicationException(Error.SubscriptionNotExistingError);
             }
         }
 
@@ -58,7 +59,7 @@ namespace SocialAPI.Repositories
         {
             var subs = await _dataContext.Subscriptions.Where(s => s.ResponderId == responderId).ToListAsync(cancellationToken);
 
-            return subs ?? throw new NullReferenceException("Список подписчиков пуст");
+            return subs ?? throw new ApplicationException(Error.NoSubscribersError);
         }
     }
 }

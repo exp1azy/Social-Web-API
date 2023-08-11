@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SocialAPI.Data;
 using SocialAPI.Repositories.Interfaces;
+using SocialAPI.Resources;
 
 namespace SocialAPI.Repositories
 {
@@ -18,7 +19,13 @@ namespace SocialAPI.Repositories
             var user = await _dataContext.Users.FirstOrDefaultAsync(u  => u.Id == commentatorId, cancellationToken);
             if (user == null)
             {
-                throw new NullReferenceException("Такого пользователя не существует");
+                throw new ApplicationException(Error.UserNotExistingError);
+            }
+
+            var post = await _dataContext.Posts.FirstOrDefaultAsync(p => p.Id == postId, cancellationToken);
+            if (post == null)
+            {
+                throw new ApplicationException(Error.PostNotExistingError);
             }
 
             await _dataContext.Comments.AddAsync(new Comment
@@ -37,7 +44,7 @@ namespace SocialAPI.Repositories
             var comment = await _dataContext.Comments.FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
             if (comment == null)
             {
-                throw new NullReferenceException("Такого комментария не существует");
+                throw new ApplicationException(Error.CommentNotExistingError);
             }
 
             _dataContext.Remove(comment);

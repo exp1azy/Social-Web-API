@@ -27,7 +27,6 @@ namespace SocialAPI.RabbitMq
             channel.ExchangeDeclare(_config["RabbitMq:ExchangeName"], ExchangeType.Fanout);
 
             var messageBytes = Encoding.UTF8.GetBytes(message);
-
             channel.BasicPublish(_config["RabbitMq:ExchangeName"], string.Empty, null, messageBytes);
         }
 
@@ -38,9 +37,7 @@ namespace SocialAPI.RabbitMq
             channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false);
 
             var body = Encoding.UTF8.GetBytes(message);
-
             channel.BasicPublish(exchange: string.Empty, routingKey: queueName, mandatory: false, basicProperties: null, body: body);
-
         }
 
         public async Task<List<string>> GetMessagesAsync(string queueName)

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SocialAPI.Data;
 using SocialAPI.Repositories.Interfaces;
+using SocialAPI.Resources;
 
 namespace SocialAPI.Repositories
 {
@@ -18,13 +19,7 @@ namespace SocialAPI.Repositories
             var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.Id == authorId, cancellationToken);
             if (user == null)
             {
-                throw new NullReferenceException("Такого пользователя не существует");
-            }
-
-            var post = await _dataContext.Posts.FirstOrDefaultAsync(p => p.AuthorId == authorId, cancellationToken);
-            if (post != null)
-            {
-                throw new NullReferenceException("Такой пост уже существует");
+                throw new ApplicationException(Error.UserNotExistingError);
             }
 
             await _dataContext.Posts.AddAsync(new Post
@@ -40,10 +35,9 @@ namespace SocialAPI.Repositories
         public async Task DeletePostAsync(int id, CancellationToken cancellationToken)
         {
             var post = await _dataContext.Posts.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
-
             if (post == null)
             {
-                throw new NullReferenceException("Такого поста не существует");
+                throw new ApplicationException(Error.PostNotExistingError);
             }
 
             _dataContext.Remove(post);
@@ -53,7 +47,7 @@ namespace SocialAPI.Repositories
         {
             var post = await _dataContext.Posts.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
 
-            return post ?? throw new NullReferenceException("Такого поста не существует");
+            return post ?? throw new ApplicationException(Error.PostNotExistingError);
         }
     }
 }

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CommentNotExistingError" xml:space="preserve">
+    <value>Такого комментария не существует</value>
+  </data>
   <data name="CommentTextError" xml:space="preserve">
     <value>Комментарий не может быть пустым или состоять из пробелов</value>
   </data>
@@ -126,6 +129,12 @@
   <data name="MessageTextError" xml:space="preserve">
     <value>Сообщение не может быть пустым или состоять из пробелов</value>
   </data>
+  <data name="NoSubscribersError" xml:space="preserve">
+    <value>Список подписчиков пуст</value>
+  </data>
+  <data name="PostNotExistingError" xml:space="preserve">
+    <value>Такого поста не существует</value>
+  </data>
   <data name="PostTextError" xml:space="preserve">
     <value>Текст поста не может быть пустым или состоять из пробелов</value>
   </data>
@@ -134,6 +143,12 @@
   </data>
   <data name="SelfSubscriptionError" xml:space="preserve">
     <value>Подписаться на себя или отписаться от себя невозможно</value>
+  </data>
+  <data name="SubscriptionExistingError" xml:space="preserve">
+    <value>Вы уже подписаны</value>
+  </data>
+  <data name="SubscriptionNotExistingError" xml:space="preserve">
+    <value>Такой подписки не существует</value>
   </data>
   <data name="UserDataError" xml:space="preserve">
     <value>Данные пользователя не могут быть пустыми или состоять из пробелов</value>
