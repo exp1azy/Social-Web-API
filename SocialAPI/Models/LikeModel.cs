@@ -11,5 +11,7 @@ namespace SocialAPI.Models
         public int PostId { get; set; }
 
         public bool IsLiked { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }

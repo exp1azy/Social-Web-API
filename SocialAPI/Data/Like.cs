@@ -12,5 +12,7 @@ namespace SocialAPI.Data
         [Column("Post_id")] public int PostId { get; set; }
 
         [Column("Is_liked")] public bool IsLiked { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }

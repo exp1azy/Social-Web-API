@@ -38,7 +38,7 @@ namespace SocialAPI.Controllers
 
                 _rabbitMqService.SendMessageToQueue($"{post.AuthorId}", message);
 
-                return Ok("Вы лайкнули запись");
+                return Ok(liked ? "Вы лайкнули запись" : "Вы дизлайкнули запись");
             }
             catch (ApplicationException ex)
             {

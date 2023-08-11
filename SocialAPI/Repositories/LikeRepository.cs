@@ -28,11 +28,18 @@ namespace SocialAPI.Repositories
                 throw new ApplicationException(Error.PostNotExistingError);
             }
 
+            var like = await _dataContext.Likes.FirstOrDefaultAsync(l => l.UserId == userId && l.PostId == postId, cancellationToken);
+            if (like != null)
+            {
+                _dataContext.Likes.Remove(like);
+            }
+
             await _dataContext.Likes.AddAsync(new Like
             {
                 UserId = userId,
                 PostId = postId,
                 IsLiked = liked,
+                Date = DateTime.UtcNow
             }, cancellationToken);
 
             await _dataContext.SaveChangesAsync(cancellationToken);
