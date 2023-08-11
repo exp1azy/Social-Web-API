@@ -1,5 +1,6 @@
 ﻿using SocialAPI.Models;
 using SocialAPI.Repositories.Interfaces;
+using SocialAPI.Resources;
 
 namespace SocialAPI.Services
 {
@@ -16,12 +17,12 @@ namespace SocialAPI.Services
         {
             if (string.IsNullOrWhiteSpace(text))
             {
-                throw new NullReferenceException("Текст поста не может быть пустым или состоять из пробелов");
+                throw new ApplicationException(Error.PostTextError);
             }
 
             if (authorId < 0)
             {
-                throw new ArgumentException("Идентификатор меньше нуля");
+                throw new ApplicationException(Error.IdentificatorError);
             }
 
             await _postRepository.CreatePostAsync(authorId, text, cancellationToken);
@@ -31,7 +32,7 @@ namespace SocialAPI.Services
         {
             if (id < 0)
             {
-                throw new ArgumentException("Идентификатор меньше нуля");
+                throw new ApplicationException(Error.IdentificatorError);
             }
 
             await _postRepository.DeletePostAsync(id, cancellationToken);
@@ -41,7 +42,7 @@ namespace SocialAPI.Services
         {
             if (id < 0)
             {
-                throw new ArgumentException("Идентификатор меньше нуля");
+                throw new ApplicationException(Error.IdentificatorError);
             }
 
             var post = await _postRepository.GetPostAsync(id, cancellationToken);

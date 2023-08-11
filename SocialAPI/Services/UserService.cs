@@ -5,6 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using SocialAPI.Data;
+using SocialAPI.Resources;
 
 namespace SocialAPI.Services
 {
@@ -46,11 +47,11 @@ namespace SocialAPI.Services
                 if (await _userRepository.FindUserAsync(user.Name, cancellationToken) == null)
                     await _userRepository.CreateNewUserAsync(user, cancellationToken);
                 else
-                    throw new BadHttpRequestException("Такой пользователь уже существует");
+                    throw new ApplicationException(Error.UserExistingError);
             }
             else
             {
-                throw new ArgumentException("Имя пользователя или пароль не могут быть пустыми или состоять из пробелов!");
+                throw new ApplicationException(Error.UserDataError);
             }
         }
 
@@ -61,10 +62,10 @@ namespace SocialAPI.Services
             if (!string.IsNullOrWhiteSpace(username))
                 dalUser = await _userRepository.FindUserAsync(username, cancellationToken);
             else
-                throw new ArgumentException("Имя пользователя не может быть пустым или состоять из пробелов!");
+                throw new ApplicationException(Error.UserDataError);
 
             if (dalUser == null)
-                throw new ArgumentException("Такого пользователя не существует!");
+                throw new ApplicationException(Error.UserNotExistingError);
 
             var currentUser = new UserModel
             {

@@ -1,4 +1,5 @@
 ﻿using SocialAPI.Repositories.Interfaces;
+using SocialAPI.Resources;
 
 namespace SocialAPI.Services
 {
@@ -15,12 +16,12 @@ namespace SocialAPI.Services
         {
             if (commentatorId < 0 || postId < 0)
             {
-                throw new ArgumentException("Идентификатор меньше нуля");
+                throw new ApplicationException(Error.IdentificatorError);
             }
 
             if (string.IsNullOrWhiteSpace(comment))
             {
-                throw new ArgumentException("Комментарий не может быть пустым или состоять из пробелов");
+                throw new ApplicationException(Error.CommentTextError);
             }
 
             await _commentRepository.CreateCommentAsync(commentatorId, postId, comment, cancellationToken);
@@ -30,7 +31,7 @@ namespace SocialAPI.Services
         {
             if (id < 0)
             {
-                throw new ArgumentException("Идентификатор меньше нуля");
+                throw new ApplicationException(Error.IdentificatorError);
             }
 
             await _commentRepository.DeleteCommentAsync(id, cancellationToken);

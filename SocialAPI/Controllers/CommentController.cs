@@ -34,11 +34,7 @@ namespace SocialAPI.Controllers
 
                 return Ok();
             }
-            catch (NullReferenceException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (ArgumentException ex)
+            catch (ApplicationException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -54,11 +50,7 @@ namespace SocialAPI.Controllers
 
                 return Ok();
             }
-            catch (NullReferenceException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (ArgumentException ex)
+            catch (ApplicationException ex)
             {
                 return BadRequest(ex.Message);
             }

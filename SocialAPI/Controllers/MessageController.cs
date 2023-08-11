@@ -31,11 +31,7 @@ namespace SocialAPI.Controllers
 
                 return Ok("Сообщение успешно отправлено");
             }
-            catch (NullReferenceException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (ArgumentException ex)
+            catch (ApplicationException ex)
             {
                 return BadRequest(ex.Message);
             }

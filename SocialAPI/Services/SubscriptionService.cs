@@ -1,5 +1,6 @@
 ﻿using SocialAPI.Models;
 using SocialAPI.Repositories.Interfaces;
+using SocialAPI.Resources;
 
 namespace SocialAPI.Services
 {
@@ -16,12 +17,12 @@ namespace SocialAPI.Services
         {
             if (followerId < 0 || responderId < 0)
             {
-                throw new ArgumentException("Идентификатор меньше нуля");
+                throw new ApplicationException(Error.IdentificatorError);
             }
 
             if (followerId == responderId)
             {
-                throw new ArgumentException("Нельзя подписаться на самого себя");
+                throw new ApplicationException(Error.SelfSubscriptionError);
             }
 
             await _subscriptionRepository.SubscribeAsync(followerId, responderId, cancellationToken);
@@ -31,12 +32,12 @@ namespace SocialAPI.Services
         {
             if (followerId < 0 || responderId < 0)
             {
-                throw new ArgumentException("Идентификатор меньше нуля");
+                throw new ApplicationException(Error.IdentificatorError);
             }
 
             if (followerId == responderId)
             {
-                throw new ArgumentException("Нельзя отписаться от самого себя");
+                throw new ApplicationException(Error.SelfSubscriptionError);
             }
 
             await _subscriptionRepository.UnsubscribeAsync(followerId, responderId, cancellationToken);
@@ -46,7 +47,7 @@ namespace SocialAPI.Services
         {
             if (responderId < 0) 
             {
-                throw new ArgumentException("Идентификатор меньше нуля");
+                throw new ApplicationException(Error.IdentificatorError);
             }
 
             var subs = await _subscriptionRepository.GetSubscriptionsAsync(responderId, cancellationToken);

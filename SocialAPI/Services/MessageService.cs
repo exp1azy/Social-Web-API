@@ -1,4 +1,5 @@
 ﻿using SocialAPI.Repositories.Interfaces;
+using SocialAPI.Resources;
 
 namespace SocialAPI.Services
 {
@@ -15,17 +16,17 @@ namespace SocialAPI.Services
         {
             if (senderId < 0 || receiverId < 0)
             {
-                throw new ArgumentException("Идентификатор меньше нуля");
+                throw new ApplicationException(Error.IdentificatorError);
             }
 
             if (senderId == receiverId)
             {
-                throw new ArgumentException("Нельзя отправить сообщение самому себе");
+                throw new ApplicationException(Error.SelfMessageError);
             }
 
             if (string.IsNullOrWhiteSpace(message))
             {
-                throw new NullReferenceException("Сообщение не может быть пустым или состоять из пробелов");
+                throw new ApplicationException(Error.MessageTextError);
             }
 
             await _messageRepository.SendMessageAsync(senderId, receiverId, message, cancellationToken);
